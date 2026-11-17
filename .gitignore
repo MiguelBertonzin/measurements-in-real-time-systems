@@ -62,6 +62,7 @@ venv/
 .publicacao/
 entrega/
 compartilhar/
+demonstracoes/
 relatorio/revisao/
 dados/**/tentativas/
 **/relatorio/revisao/
