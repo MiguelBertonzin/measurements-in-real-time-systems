@@ -1,0 +1,32 @@
+{
+  "campanha": "miguel_esp32_individual",
+  "etapa": 3,
+  "identificacao_hardware": {
+    "origem": "Saida de esptool chip-id executado pelo usuario na COM7",
+    "esptool": "5.3.1",
+    "chip": "ESP32-D0WD-V3",
+    "revisao": "v3.1",
+    "cristal_mhz": 40,
+    "mac": "1c:69:20:31:5e:e8",
+    "porta": "COM7",
+    "frequencia_maxima_informada_mhz": 240,
+    "frequencia_configurada_experimento_mhz": 160,
+    "log": "identificacao_placa.txt"
+  },
+  "sha256_terminal_build_flash": "b773f9ba6d98962e7e37505121d4e1e92a524452e2324d2b62c9253021f14013",
+  "sha256_elf_confirmado_no_log": "ccd538bc3f1ee244f3b6bba4b7505ee5f25a3123b741caeeed7c8772f4523716",
+  "sha256_bin": "9514e41f0acf4042918683f665bd9fd14e54c7eafa339a43b28259a7b0747590",
+  "contadores": {
+    "buffer_trabalhos": 1431,
+    "cpu_trabalhos": 3338,
+    "disputas_mutex_huffman": 179,
+    "liberacoes_atrasadas": 0
+  },
+  "atrasos_cargas": {
+    "buffer": 0,
+    "cpu": 0
+  },
+  "boots_rom": 1,
+  "amostras_descartadas": 0,
+  "conclusao": "1000 ativacoes consecutivas e validas; cargas ativas; firmware, hashes e configuracao conferidos; perdas de prazo contabilizadas como resultado"
+}

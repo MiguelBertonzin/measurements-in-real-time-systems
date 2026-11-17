@@ -1,0 +1,3 @@
+-r requirements-analise.txt
+reportlab==5.1.0
+pypdf==7.0.1

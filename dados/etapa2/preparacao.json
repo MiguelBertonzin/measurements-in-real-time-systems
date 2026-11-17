@@ -1,0 +1,41 @@
+{
+  "etapa": 2,
+  "versao": "etapa2-evento-v1",
+  "ativacoes": 1000,
+  "entrada_bytes": 4096,
+  "semente": 123456789,
+  "deadline_fixo_us": 32440.8,
+  "evento": "simulado por fila, um por vez, com confirmacao antes do proximo",
+  "intervalo": "antes do envio do evento ate o fim da validacao na tarefa",
+  "cpu_config_mhz": 160,
+  "tick_hz": 100,
+  "tarefa_core": 0,
+  "prioridade": 1,
+  "compilacao_esp32": "Concluida com sucesso; gravacao e execucao na placa pendentes",
+  "sha256": {
+    "CMakeLists.txt": "9a89907a6d3e61bc515c277f4a82dd4ef39e55ee4f38d17c70179aaa85dd6e19",
+    "sdkconfig": "91d0d9fa0caf88f7ace2b4e2c94b18d7d83ac682575c905311e8b221574b522e",
+    "main/CMakeLists.txt": "cbf1e73df5c9adaa87c6cf7bfc573456e7d1d62b9f69d0f66aa3a2469023ac49",
+    "main/huffman.c": "b3639eed97edcf316a97eecf5b46e3757b781a7834b05c9e2b202a92c0c3e9be",
+    "main/huffman.h": "393a39cdf6ae64c85c71507771ab48a319e8c8148316829ff2b21e781f4c0bc6",
+    "main/main.c": "0396576456d70469fbd48f598bdd21a0d481a581f2305cb4d40b37433116f15c"
+  },
+  "campanha": "miguel_esp32_individual",
+  "identificacao_hardware": {
+    "origem": "Saida de esptool chip-id executado pelo usuario na COM7",
+    "esptool": "5.3.1",
+    "chip": "ESP32-D0WD-V3",
+    "revisao": "v3.1",
+    "cristal_mhz": 40,
+    "mac": "1c:69:20:31:5e:e8",
+    "porta": "COM7",
+    "frequencia_maxima_informada_mhz": 240,
+    "frequencia_configurada_experimento_mhz": 160,
+    "log": "identificacao_placa.txt"
+  },
+  "origem_cenario": "Cenario da etapa 2; fontes preservados em fontes/",
+  "sha256_build_preparado": {
+    "build/M3_STR.elf": "17b54659bc54d0f8ff37abf69565445d620445e36f527f7eba7379cbdbdfe21a",
+    "build/M3_STR.bin": "ddf71cbccddacbb899adb36bb374a130bcfca4a61475f06fc5f4b094f46e609b"
+  }
+}

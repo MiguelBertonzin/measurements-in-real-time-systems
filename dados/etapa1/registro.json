@@ -1,0 +1,69 @@
+{
+  "campanha": "miguel_esp32_individual",
+  "etapa": 1,
+  "escopo": "tarefa",
+  "origem": "Coleta real na ESP32 de Miguel; capturada por serial e validada contra o log",
+  "sha256_log_original": "39756c929271b13a24d2cf75965a0af5f2ad37d117f73223220f42a42339acd9",
+  "sha256_csv": "39137dfad96dd47a71e1d7aeb75744bbc2fe10811f286d0e361a2c377d0b588c",
+  "ativacoes_validadas": 1000,
+  "entrada_bytes": 4096,
+  "semente": 123456789,
+  "identificacao_hardware": {
+    "origem": "Saida de esptool chip-id executado pelo usuario na COM7",
+    "esptool": "5.3.1",
+    "chip": "ESP32-D0WD-V3",
+    "revisao": "v3.1",
+    "cristal_mhz": 40,
+    "mac": "1c:69:20:31:5e:e8",
+    "porta": "COM7",
+    "frequencia_maxima_informada_mhz": 240,
+    "frequencia_configurada_experimento_mhz": 160,
+    "log": "identificacao_placa.txt"
+  },
+  "deadline_fixo_us": 32440.8,
+  "regra_deadline": "1.2 * HWM desta etapa 1",
+  "resultados_us": {
+    "minimo": 26818.0,
+    "media": 26864.804,
+    "hwm_100": 27034.0
+  },
+  "captura": {
+    "campanha": "miguel_esp32_individual",
+    "etapa": 1,
+    "porta": "COM7",
+    "baudrate": 115200,
+    "estado": "captura_recebida_pendente_validacao_csv",
+    "sha256_fontes_no_inicio": {
+      "sdkconfig": "91d0d9fa0caf88f7ace2b4e2c94b18d7d83ac682575c905311e8b221574b522e",
+      "main/CMakeLists.txt": "cbf1e73df5c9adaa87c6cf7bfc573456e7d1d62b9f69d0f66aa3a2469023ac49",
+      "main/huffman.c": "b3639eed97edcf316a97eecf5b46e3757b781a7834b05c9e2b202a92c0c3e9be",
+      "main/huffman.h": "393a39cdf6ae64c85c71507771ab48a319e8c8148316829ff2b21e781f4c0bc6",
+      "main/main.c": "6fbb9414f1caba1e2919a1f5b4e12d80176b58b37727b9eb728301d89f325e92"
+    },
+    "nota": "Hashes são dos fontes locais; conferir build/flash e identificação do firmware no log.",
+    "sha256_log": "39756c929271b13a24d2cf75965a0af5f2ad37d117f73223220f42a42339acd9"
+  },
+  "sha256_fontes": {
+    "CMakeLists.txt": "9a89907a6d3e61bc515c277f4a82dd4ef39e55ee4f38d17c70179aaa85dd6e19",
+    "sdkconfig": "91d0d9fa0caf88f7ace2b4e2c94b18d7d83ac682575c905311e8b221574b522e",
+    "scripts/coletar_etapa.py": "c334a54434512b24450224a26f89f892a93d0da7cb184523008be35df56a9b35",
+    "main/CMakeLists.txt": "cbf1e73df5c9adaa87c6cf7bfc573456e7d1d62b9f69d0f66aa3a2469023ac49",
+    "main/huffman.c": "b3639eed97edcf316a97eecf5b46e3757b781a7834b05c9e2b202a92c0c3e9be",
+    "main/huffman.h": "393a39cdf6ae64c85c71507771ab48a319e8c8148316829ff2b21e781f4c0bc6",
+    "main/main.c": "6fbb9414f1caba1e2919a1f5b4e12d80176b58b37727b9eb728301d89f325e92"
+  },
+  "sha256_build": {
+    "M3_STR.elf": "a0e9b27a18975379eb2619eaaa9869e74b8327ce58f0f76d88aa404cc0983078",
+    "M3_STR.bin": "f47c4dce3ea85ea9f7931ee18f933218359c2aa383f6df224ddd755d2136a3fc",
+    "bootloader/bootloader.bin": "97dd96e0a2de63f250178f322394cb833829da36a1a2d312492610623b7fe35c",
+    "partition_table/partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
+  },
+  "sha256_terminal_build_flash": "73d86edbe1009a39b52e72350aee29a497f98f45b941ba89637c12d28c71e2f0",
+  "idf_no_log": "v6.1-dirty",
+  "observacoes": [
+    "Log confirma CPU 160 MHz, revisão v3.1, tarefa principal na CPU0 e validação completa.",
+    "ESP-IDF v6.1-dirty registrado no boot e na aplicação.",
+    "Flash física 4096 KiB, cabeçalho configurado para 2048 KiB.",
+    "HWM calculado a partir das 1.000 ativações desta coleta."
+  ]
+}

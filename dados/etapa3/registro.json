@@ -1,0 +1,79 @@
+{
+  "etapa": 3,
+  "escopo": "intertarefas",
+  "sha256_log_original": "3e4f17105caa1f1205feac82eac1376cd97c35a7ce3bd8f98b3395ce47fdfc75",
+  "log_para_analise": "log_validado.txt",
+  "sha256_log_validado": "3e4f17105caa1f1205feac82eac1376cd97c35a7ce3bd8f98b3395ce47fdfc75",
+  "offset_boot_validado_bytes": 0,
+  "observacao_prefixo": "Log integral sem prefixo separado",
+  "preparacao": {
+    "etapa": 3,
+    "versao": "etapa3-mutex-v1",
+    "ativacoes": 1000,
+    "entrada_bytes": 4096,
+    "semente": 123456789,
+    "deadline_fixo_us": 32440.8,
+    "evento": "liberacao periodica via fila, com confirmacao antes da proxima ativacao",
+    "intervalo": "envio efetivo do evento ate validacao e liberacao do mutex; inclui espera e preempcoes",
+    "limite_da_medicao": "nao inclui atraso de liberacao do gerador antes do envio do evento",
+    "cpu_config_mhz": 160,
+    "tick_hz": 100,
+    "tarefa_core": 0,
+    "prioridade": 1,
+    "periodos_ms": {
+      "huffman": 100,
+      "buffer": 70,
+      "cpu": 30
+    },
+    "prioridades": {
+      "huffman": 1,
+      "buffer": 1,
+      "cpu": 2
+    },
+    "recurso_compartilhado": "buffer encoded protegido por mutex; Huffman utiliza durante todo o processamento",
+    "carga_buffer": {
+      "bytes_por_trabalho": 128,
+      "retencao_ticks_normal": 1,
+      "retencao_ticks_a_cada_8_trabalhos": 2
+    },
+    "carga_cpu": {
+      "orcamento_parede_us": 3000,
+      "operacoes": "LCG inteiro volatile em lotes de 128 iteracoes"
+    },
+    "estabilizacao_ms": 100,
+    "compilacao_esp32": "Concluida com sucesso; gravacao e execucao na placa pendentes",
+    "sha256": {
+      "CMakeLists.txt": "9a89907a6d3e61bc515c277f4a82dd4ef39e55ee4f38d17c70179aaa85dd6e19",
+      "sdkconfig": "91d0d9fa0caf88f7ace2b4e2c94b18d7d83ac682575c905311e8b221574b522e",
+      "main/CMakeLists.txt": "cbf1e73df5c9adaa87c6cf7bfc573456e7d1d62b9f69d0f66aa3a2469023ac49",
+      "main/huffman.c": "b3639eed97edcf316a97eecf5b46e3757b781a7834b05c9e2b202a92c0c3e9be",
+      "main/huffman.h": "393a39cdf6ae64c85c71507771ab48a319e8c8148316829ff2b21e781f4c0bc6",
+      "main/main.c": "35d66603f8055f180f12bfc55cb87d985b1954476cdfef9d1e35942193a2bfbf"
+    },
+    "campanha": "miguel_esp32_individual",
+    "identificacao_hardware": {
+      "origem": "Saida de esptool chip-id executado pelo usuario na COM7",
+      "esptool": "5.3.1",
+      "chip": "ESP32-D0WD-V3",
+      "revisao": "v3.1",
+      "cristal_mhz": 40,
+      "mac": "1c:69:20:31:5e:e8",
+      "porta": "COM7",
+      "frequencia_maxima_informada_mhz": 240,
+      "frequencia_configurada_experimento_mhz": 160,
+      "log": "identificacao_placa.txt"
+    },
+    "origem_cenario": "Cenario da etapa 3; fontes preservados em fontes/",
+    "sha256_build_preparado": {
+      "build/M3_STR.elf": "ccd538bc3f1ee244f3b6bba4b7505ee5f25a3123b741caeeed7c8772f4523716",
+      "build/M3_STR.bin": "9514e41f0acf4042918683f665bd9fd14e54c7eafa339a43b28259a7b0747590"
+    }
+  },
+  "ativacoes_validadas": 1000,
+  "resultados_us": {
+    "minimo": 26855.0,
+    "media": 28693.667,
+    "hwm_100": 39962.0
+  },
+  "origem": "Log real fornecido pelo usuario; nao e simulacao"
+}

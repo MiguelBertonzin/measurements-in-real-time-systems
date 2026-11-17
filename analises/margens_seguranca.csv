@@ -1,0 +1,4 @@
+margem_percentual,limite_us,etapa1_cobre_hwm,etapa1_folga_us,etapa2_cobre_hwm,etapa2_folga_us,etapa3_cobre_hwm,etapa3_folga_us,etapa4_cobre_hwm,etapa4_folga_us,primeira_etapa_insuficiente
+10,29737.4,True,2703.4,True,2589.4,False,-10224.6,False,-10566.6,3
+25,33792.5,True,6758.5,True,6644.5,False,-6169.5,False,-6511.5,3
+50,40551.0,True,13517.0,True,13403.0,True,589.0,True,247.0,

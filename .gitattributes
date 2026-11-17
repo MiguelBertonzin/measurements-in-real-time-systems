@@ -1,0 +1,4 @@
+# Preserva os bytes dos logs e fontes usados nos hashes de rastreabilidade.
+* -text
+*.pdf binary
+*.png binary

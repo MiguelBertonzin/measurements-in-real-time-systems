@@ -1,0 +1,23 @@
+{
+  "campanha": "miguel_esp32_individual",
+  "etapa": 2,
+  "identificacao_hardware": {
+    "origem": "Saida de esptool chip-id executado pelo usuario na COM7",
+    "esptool": "5.3.1",
+    "chip": "ESP32-D0WD-V3",
+    "revisao": "v3.1",
+    "cristal_mhz": 40,
+    "mac": "1c:69:20:31:5e:e8",
+    "porta": "COM7",
+    "frequencia_maxima_informada_mhz": 240,
+    "frequencia_configurada_experimento_mhz": 160,
+    "log": "identificacao_placa.txt"
+  },
+  "sha256_terminal_build_flash": "1db48ac5de6c1da4fdde0b60910980c4c137d74e1b8e2e1e1ef26cff065875bb",
+  "sha256_elf_confirmado_no_log": "17b54659bc54d0f8ff37abf69565445d620445e36f527f7eba7379cbdbdfe21a",
+  "sha256_bin": "ddf71cbccddacbb899adb36bb374a130bcfca4a61475f06fc5f4b094f46e609b",
+  "prefixo_boot_bytes": 33340,
+  "mensagens_rom_anteriores": 35,
+  "amostras_descartadas": 0,
+  "conclusao": "1000 ativacoes consecutivas; validacao de todas confirmada; firmware e configuracao conferidos; prefixo anterior sem marcadores de execucao, causa nao determinada"
+}

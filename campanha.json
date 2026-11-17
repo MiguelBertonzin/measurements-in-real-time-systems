@@ -1,0 +1,52 @@
+{
+  "id": "miguel_esp32_individual",
+  "responsavel": "Miguel Bertonzin",
+  "data_preparacao": "2026-11-16",
+  "placa": "ESP32 propria de Miguel; ESP32-D0WD-V3 revisao v3.1",
+  "identificacao_hardware": {
+    "origem": "Saida de esptool chip-id executado pelo usuario na COM7",
+    "esptool": "5.3.1",
+    "chip": "ESP32-D0WD-V3",
+    "revisao": "v3.1",
+    "cristal_mhz": 40,
+    "mac": "1c:69:20:31:5e:e8",
+    "porta": "COM7",
+    "frequencia_maxima_informada_mhz": 240,
+    "frequencia_configurada_experimento_mhz": 160,
+    "log": "identificacao_placa.txt"
+  },
+  "etapa_preparada": 4,
+  "etapas_coletadas": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "deadline_fixo_us": 32440.8,
+  "regra_deadline": "1.2 * HWM da etapa 1",
+  "entrada_bytes": 4096,
+  "semente": 123456789,
+  "amostras_por_etapa": {
+    "1": 1000,
+    "2": 1000,
+    "3": 1000,
+    "4": 10000
+  },
+  "sha256_fontes_iniciais": {
+    "CMakeLists.txt": "9a89907a6d3e61bc515c277f4a82dd4ef39e55ee4f38d17c70179aaa85dd6e19",
+    "main/CMakeLists.txt": "cbf1e73df5c9adaa87c6cf7bfc573456e7d1d62b9f69d0f66aa3a2469023ac49",
+    "main/huffman.c": "b3639eed97edcf316a97eecf5b46e3757b781a7834b05c9e2b202a92c0c3e9be",
+    "main/huffman.h": "393a39cdf6ae64c85c71507771ab48a319e8c8148316829ff2b21e781f4c0bc6",
+    "main/main.c": "6fbb9414f1caba1e2919a1f5b4e12d80176b58b37727b9eb728301d89f325e92",
+    "scripts/medir_cobertura.py": "73355ce593370002f65d222853c201f15c35412b22610f0b0ada3353adb5e074",
+    "scripts/metricas.py": "da6b8589a0243b7bdd7e0e345bb6a3ec0c18b32b7e6fa410d7e65a96f39fc26b",
+    "sdkconfig": "91d0d9fa0caf88f7ace2b4e2c94b18d7d83ac682575c905311e8b221574b522e",
+    "tests/test_huffman.c": "e3f61ded7b0a403077f7870432a4b0293f28cb142c5af11c9973bc382aaef37b"
+  },
+  "etapa1_registro": "dados/etapa1/registro.json",
+  "etapa2_registro": "dados/etapa2/registro.json",
+  "etapa3_registro": "dados/etapa3/registro.json",
+  "etapa4_registro": "dados/etapa4/registro.json",
+  "estado": "coletas_analises_relatorio_concluidos_ra_pendente",
+  "relatorio": "relatorio/Relatorio_Individual_Miguel_STR.pdf"
+}

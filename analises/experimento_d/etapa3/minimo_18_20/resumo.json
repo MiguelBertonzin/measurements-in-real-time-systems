@@ -1,0 +1,46 @@
+{
+  "n": 1000,
+  "deadline_us": 39960.0,
+  "minimo_us": 26855.0,
+  "media_us": 28693.667,
+  "mediana_us": 26906.0,
+  "desvio_padrao_populacional_us": 3977.5609536638153,
+  "hwm_100_us": 39962.0,
+  "hwm_99_us": 39948.0,
+  "hwm_99_descartadas": 10,
+  "perdas": 2,
+  "cumpridas": 998,
+  "percentual_no_prazo": 99.8,
+  "skip_factor": 294,
+  "perdas_isoladas": 2,
+  "quantidade_rajadas": 0,
+  "perdas_em_rajadas": 0,
+  "maior_rajada": 0,
+  "maior_sequencia_perdas": 1,
+  "janelas": {
+    "10": {
+      "k": 10,
+      "m": 9,
+      "perdas_maximas": 1,
+      "primeira_pior_janela_inicio": 613,
+      "primeira_pior_janela_fim": 622,
+      "quantidade_piores_janelas": 20
+    },
+    "20": {
+      "k": 20,
+      "m": 19,
+      "perdas_maximas": 1,
+      "primeira_pior_janela_inicio": 603,
+      "primeira_pior_janela_fim": 622,
+      "quantidade_piores_janelas": 40
+    },
+    "50": {
+      "k": 50,
+      "m": 49,
+      "perdas_maximas": 1,
+      "primeira_pior_janela_inicio": 573,
+      "primeira_pior_janela_fim": 622,
+      "quantidade_piores_janelas": 100
+    }
+  }
+}

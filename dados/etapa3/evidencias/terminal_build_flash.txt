@@ -1,0 +1,106 @@
+(venv) PS C:\Users\Migue\M3_STR\campanhas\miguel_esp32> & 'C:\Espressif\tools\Microsoft.v6.1.PowerShell_profile.ps1'
+IDF PowerShell Environment
+-------------------------
+Environment variables set:
+IDF_PATH: C:\esp\v6.1\esp-idf
+IDF_TOOLS_PATH: C:\Espressif\tools
+IDF_PYTHON_ENV_PATH: C:\Espressif\tools\python\v6.1\venv
+
+Custom commands available:
+idf.py - Use this to run IDF commands (e.g., idf.py build)
+esptool.py
+espefuse.py
+espsecure.py
+otatool.py
+parttool.py
+
+Python environment activated.
+You can now use IDF commands and Python tools.
+(venv) PS C:\Users\Migue\M3_STR\campanhas\miguel_esp32> cd C:\Users\Migue\M3_STR\campanhas\miguel_esp32
+(venv) PS C:\Users\Migue\M3_STR\campanhas\miguel_esp32> idf.py -p COM7 build flash
+Executing action: all (aliases: build)
+Running ninja in directory C:\Users\Migue\M3_STR\campanhas\miguel_esp32\build
+Executing "ninja all"...
+[1/4] C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\Migue\M3_STR\campanhas\mig...tition-table.bin C:/Users/Migue/M3_STR/campanhas/miguel_esp32/build/M3_STR.bin"
+M3_STR.bin binary size 0x24990 bytes. Smallest app partition is 0x100000 bytes. 0xdb670 bytes (86%) free.
+[1/1] C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\Migue\M3_STR\campanhas\mig...0 C:/Users/Migue/M3_STR/campanhas/miguel_esp32/build/bootloader/bootloader.bin"
+Bootloader binary size 0x6640 bytes. 0x9c0 bytes (9%) free.
+[4/4] Completed 'bootloader'Executing action: flash
+Running ninja in directory C:\Users\Migue\M3_STR\campanhas\miguel_esp32\build
+Executing "ninja flash"...
+[1/5] C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\Migue\M3_STR\campanhas\miguel_esp32\build && C:\Espressif\tools\python\v6.1\venv\Scripts\python.exe C:/esp/v6.1/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 partition --type app C:/Users/Migue/M3_STR/campanhas/miguel_esp32/build/partition_table/partition-table.bin C:/Users/Migue/M3_STR/campanhas/miguel_esp32/build/M3_STR.bin"
+M3_STR.bin binary size 0x24990 bytes. Smallest app partition is 0x100000 bytes. 0xdb670 bytes (86%) free.
+[2/5] Performing build step for 'bootloader'
+[1/1] C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\Migue\M3_STR\campanhas\miguel_esp32\build\bootloader && C:\Espressif\tools\python\v6.1\venv\Scripts\python.exe C:/esp/v6.1/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x1000 C:/Users/Migue/M3_STR/campanhas/miguel_esp32/build/bootloader/bootloader.bin"
+Bootloader binary size 0x6640 bytes. 0x9c0 bytes (9%) free.
+[3/5] No install step for 'bootloader'
+[4/5] Completed 'bootloader'
+[4/5] Running utility command for flash
+esptool --chip esp32 -p COM7 -b 460800 --before=default-reset --after=hard-reset write-flash --flash-mode dio --flash-freq 40m --flash-size 2MB 0x1000 bootloader/bootloader.bin 0x8000 partition_table/partition-table.bin 0x10000 M3_STR.bin --diff-with bootloader/bootloader_flashed.bin partition_table/partition-table_flashed.bin M3_STR_flashed.bin
+esptool v5.3.1
+Serial port COM7:
+Connecting.......
+Connected to ESP32 on COM7:
+Chip type:          ESP32-D0WD-V3 (revision v3.1)
+Features:           Wi-Fi, BT, Dual Core + LP Core, 240MHz, Vref calibration in eFuse, Coding Scheme None
+Crystal frequency:  40MHz
+MAC:                1c:69:20:31:5e:e8
+
+Uploading stub flasher...
+Running stub flasher...
+Stub flasher running.
+Changing baud rate to 460800...
+Changed.
+
+Configuring flash size...
+
+Writing 'bootloader/bootloader.bin' at 0x00001000...
+SHA digest in image updated.
+SHA digest in image updated.
+No changed sectors found, verifying if data is in flash...
+'bootloader/bootloader.bin' at 0x00001000 verified.
+
+Writing 'partition_table/partition-table.bin' at 0x00008000...
+No changed sectors found, verifying if data is in flash...
+'partition_table/partition-table.bin' at 0x00008000 verified.
+
+Writing 'M3_STR.bin' at 0x00010000...
+Changed data sectors found, fast reflashing...
+Reflashing 1 changed sector at 0x00010000...
+Flash will be erased from 0x00010000 to 0x00010fff...
+Compressed 4096 bytes to 1899...
+Writing at 0x00010000 [                              ]   0.0% 0/1899 bytes... 
+Writing at 0x00011000 [==============================] 100.0% 1899/1899 bytes... 
+Wrote 4096 bytes (1899 compressed) at 0x00010000 in 0.0 seconds (680.3 kbit/s).
+Reflashing 35 changed sectors at 0x00012000...
+Flash will be erased from 0x00012000 to 0x00034fff...
+Compressed 143360 bytes to 83003...
+Writing at 0x00012000 [                              ]   0.0% 0/83003 bytes... 
+Writing at 0x0001d11f [====>                         ]  19.7% 16384/83003 bytes... 
+Writing at 0x00022c48 [==========>                   ]  39.5% 32768/83003 bytes... 
+Writing at 0x00028388 [================>             ]  59.2% 49152/83003 bytes... 
+Writing at 0x0002de35 [======================>       ]  79.0% 65536/83003 bytes... 
+Writing at 0x000341f0 [============================> ]  98.7% 81920/83003 bytes... 
+Writing at 0x00035000 [==============================] 100.0% 83003/83003 bytes... 
+Wrote 143360 bytes (83003 compressed) at 0x00012000 in 2.3 seconds (488.7 kbit/s).
+Verifying written data...
+Hash of data verified.
+
+Hard resetting via RTS pin...
+Done
+(venv) PS C:\Users\Migue\M3_STR\campanhas\miguel_esp32> if ($LASTEXITCODE -eq 0) {
+>>     & 'C:\Espressif\tools\python\v6.1\venv\Scripts\python.exe' scripts/coletar_etapa.py --porta COM7 --etapa 3
+>> }
+Campanha: miguel_esp32_individual. Etapa: 3. Porta: COM7
+Log: C:\Users\Migue\M3_STR\campanhas\miguel_esp32\dados\etapa3\tentativas\serial_20261116_214556_fae34e3f.txt
+Monitor ESP-IDF deve estar fechado. O CSV aparece somente após as medições.
+Aguardando boot. Se não iniciar, pressione EN/RESET uma vez.
+Aguardando resultado: 15 s; 3840 bytes salvos.
+Aguardando resultado: 30 s; 3840 bytes salvos.
+Aguardando resultado: 45 s; 3840 bytes salvos.
+Aguardando resultado: 60 s; 3840 bytes salvos.
+Aguardando resultado: 75 s; 3840 bytes salvos.
+Aguardando resultado: 90 s; 3840 bytes salvos.
+Captura concluída: C:\Users\Migue\M3_STR\campanhas\miguel_esp32\dados\etapa3\tentativas\serial_20261116_214556_fae34e3f.txt
+Envie o caminho acima para validar o CSV e preparar a próxima etapa.
+(venv) PS C:\Users\Migue\M3_STR\campanhas\miguel_esp32> 

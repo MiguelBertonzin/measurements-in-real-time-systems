@@ -1,0 +1,35 @@
+{
+  "campanha": "miguel_esp32_individual",
+  "etapa": 4,
+  "identificacao_hardware": {
+    "origem": "Saida de esptool chip-id executado pelo usuario na COM7",
+    "esptool": "5.3.1",
+    "chip": "ESP32-D0WD-V3",
+    "revisao": "v3.1",
+    "cristal_mhz": 40,
+    "mac": "1c:69:20:31:5e:e8",
+    "porta": "COM7",
+    "frequencia_maxima_informada_mhz": 240,
+    "frequencia_configurada_experimento_mhz": 160,
+    "log": "identificacao_placa.txt"
+  },
+  "sha256_terminal_build_flash": "49e680be6b76b6c65c226aba64a0fc13ee8ac80b1bbcba9ac7c310ac01f53d98",
+  "sha256_elf_confirmado_no_log": "f6550bf2262a9a9eb0760969651861a798a9c0b6d5df4413bb93ebd2ca79f6ba",
+  "sha256_bin": "0eebc161a8531061a5f4adfa54b9ccec2dbfd87a6d6db4a2cb3d15f980e2dd86",
+  "contadores": {
+    "buffer_trabalhos": 14288,
+    "cpu_trabalhos": 33339,
+    "disputas_mutex_huffman": 1786,
+    "liberacoes_atrasadas": 0,
+    "uart_bytes": 1342958,
+    "uart_leituras": 9524,
+    "uart_checksum": 3265986663
+  },
+  "atrasos_cargas": {
+    "buffer": 0,
+    "cpu": 0
+  },
+  "boots_rom": 1,
+  "amostras_descartadas": 0,
+  "conclusao": "10000 ativacoes consecutivas e validas; cargas ativas e UART recebida; firmware, hashes e configuracao conferidos"
+}

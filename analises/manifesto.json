@@ -1,0 +1,60 @@
+{
+  "fontes": {
+    "1": {
+      "csv": "dados\\etapa1\\etapa1_tarefa.csv",
+      "sha256_csv": "39137dfad96dd47a71e1d7aeb75744bbc2fe10811f286d0e361a2c377d0b588c",
+      "sha256_log": "39756c929271b13a24d2cf75965a0af5f2ad37d117f73223220f42a42339acd9"
+    },
+    "2": {
+      "csv": "dados\\etapa2\\etapa2_comportamental.csv",
+      "sha256_csv": "083e123f8e010151c5e671e431a30ed9a30f8c7a34748c13eee192d711ea9516",
+      "sha256_log": "52e59460aca43fd7853b49a80a9524df4c425699c1264ee0bb9b1310a9c69a31"
+    },
+    "3": {
+      "csv": "dados\\etapa3\\etapa3_intertarefas.csv",
+      "sha256_csv": "88f458e7f7c00167fe979f75ed1834c89408f64543b8eefb734d58150963b0df",
+      "sha256_log": "3e4f17105caa1f1205feac82eac1376cd97c35a7ce3bd8f98b3395ce47fdfc75"
+    },
+    "4": {
+      "csv": "dados\\etapa4\\etapa4_sistema.csv",
+      "sha256_csv": "5bff854fd23f8296640453bf9afbceaf635d70ac34aa4ca65c98790304537dc9",
+      "sha256_log": "cb0ca53ae5bed9804884aa6154b714bb264086cd84abe2d41421f957d09e13d4"
+    }
+  },
+  "deadline_fixo_us": 32440.8,
+  "meta_ilustrativa": [
+    18,
+    20
+  ],
+  "python": "3.11.15",
+  "matplotlib": "3.11.2",
+  "numpy": "2.4.6",
+  "modulo_huffman_e_sdkconfig_preservados_iguais": true,
+  "cobertura": {
+    "escopo": "main/huffman.c; testes no computador Windows, nao na ESP32",
+    "compilador": "gcc.exe (x86_64-posix-seh-rev0, Built by MinGW-W64 project) 8.1.0",
+    "opcoes": [
+      "-std=c11",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-O0",
+      "--coverage",
+      "-I",
+      "../../main"
+    ],
+    "linhas_percentual": 98.89,
+    "desvios_executados_percentual": 100.0,
+    "desvios_tomados_percentual": 98.75,
+    "observacao": "Cobertura de desvio usa Taken at least once; Branches executed nao significa ambos os resultados tomados.",
+    "sha256": {
+      "main/huffman.c": "b3639eed97edcf316a97eecf5b46e3757b781a7834b05c9e2b202a92c0c3e9be",
+      "main/huffman.h": "393a39cdf6ae64c85c71507771ab48a319e8c8148316829ff2b21e781f4c0bc6",
+      "tests/test_huffman.c": "e3f61ded7b0a403077f7870432a4b0293f28cb142c5af11c9973bc382aaef37b"
+    }
+  },
+  "sha256_scripts": {
+    "metricas.py": "da6b8589a0243b7bdd7e0e345bb6a3ec0c18b32b7e6fa410d7e65a96f39fc26b",
+    "analisar_coletas.py": "54f90bf5d43902e205ce5f583bfb18baeb09053cf24c415e5ee21875fd47d585"
+  }
+}

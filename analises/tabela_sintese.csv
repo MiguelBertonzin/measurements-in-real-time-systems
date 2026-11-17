@@ -1,0 +1,5 @@
+etapa,escopo,n,cobertura_linha_host,cobertura_desvio_host,minimo_us,media_us,hwm_100_us,hwm_99_us,deadline_us,percentual_no_prazo,perdas,skip_factor,quantidade_rajadas,maior_rajada,m_k10,m_k20,m_k50
+1,Tarefa,1000,98.89,98.75,26818.0,26864.804,27034.0,26898.0,32440.8,100.0,0,,0,0,10,20,50
+2,Comportamental,1000,98.89,98.75,26844.0,26891.429,27148.0,26924.0,32440.8,100.0,0,,0,0,10,20,50
+3,Intertarefas,1000,98.89,98.75,26855.0,28693.667,39962.0,39948.0,32440.8,82.1,179,2,0,0,7,16,40
+4,Sistema,10000,98.89,98.75,26893.0,28906.5169,40304.0,40094.0,32440.8,82.14,1786,2,0,0,7,16,40

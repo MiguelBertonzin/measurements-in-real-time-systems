@@ -1,0 +1,26 @@
+$ C:\Program Files\CodeBlocks\MinGW\bin\gcc.exe --version
+gcc.exe (x86_64-posix-seh-rev0, Built by MinGW-W64 project) 8.1.0
+Copyright (C) 2018 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+
+$ C:\Program Files\CodeBlocks\MinGW\bin\gcc.exe -std=c11 -Wall -Wextra -Werror -O0 --coverage -I ../../main -c ../../main/huffman.c -o huffman.o
+
+$ C:\Program Files\CodeBlocks\MinGW\bin\gcc.exe -std=c11 -Wall -Wextra -Werror -O0 --coverage -I ../../main -c ../../tests/test_huffman.c -o test_huffman.o
+
+$ C:\Program Files\CodeBlocks\MinGW\bin\gcc.exe --coverage huffman.o test_huffman.o -o C:\Users\Migue\M3_STR\campanhas\miguel_esp32\build\coverage\test_huffman.exe
+
+$ C:\Users\Migue\M3_STR\campanhas\miguel_esp32\build\coverage\test_huffman.exe
+OK: entradas vazia, unica, repetida, 256 simbolos, codigos longos,
+argumentos invalidos, arvore corrompida, vetor conhecido, fluxo truncado,
+limites dos buffers e 1000 entradas pseudoaleatorias validadas.
+
+$ C:\Program Files\CodeBlocks\MinGW\bin\gcov.exe -b -c huffman.gcno
+File '../../main/huffman.c'
+Lines executed:98.89% of 90
+Branches executed:100.00% of 80
+Taken at least once:98.75% of 80
+Calls executed:100.00% of 6
+Creating 'huffman.c.gcov'
+

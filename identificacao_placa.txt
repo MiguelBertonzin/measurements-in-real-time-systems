@@ -1,0 +1,16 @@
+Identificação fornecida por Miguel no acompanhamento da campanha individual.
+Comando: Python do ESP-IDF -m esptool --port COM7 chip-id
+
+esptool v5.3.1
+Connected to ESP32 on COM7:
+Chip type:          ESP32-D0WD-V3 (revision v3.1)
+Features:           Wi-Fi, BT, Dual Core + LP Core, 240MHz, Vref calibration in eFuse, Coding Scheme None
+Crystal frequency:  40MHz
+MAC:                1c:69:20:31:5e:e8
+
+Stub flasher running.
+
+Warning: ESP32 has no chip ID. Reading MAC address instead.
+MAC:                1c:69:20:31:5e:e8
+
+Hard resetting via RTS pin...

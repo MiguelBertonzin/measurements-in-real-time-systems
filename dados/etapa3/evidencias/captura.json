@@ -1,0 +1,16 @@
+{
+  "campanha": "miguel_esp32_individual",
+  "etapa": 3,
+  "porta": "COM7",
+  "baudrate": 115200,
+  "estado": "captura_recebida_pendente_validacao_csv",
+  "sha256_fontes_no_inicio": {
+    "sdkconfig": "91d0d9fa0caf88f7ace2b4e2c94b18d7d83ac682575c905311e8b221574b522e",
+    "main/CMakeLists.txt": "cbf1e73df5c9adaa87c6cf7bfc573456e7d1d62b9f69d0f66aa3a2469023ac49",
+    "main/huffman.c": "b3639eed97edcf316a97eecf5b46e3757b781a7834b05c9e2b202a92c0c3e9be",
+    "main/huffman.h": "393a39cdf6ae64c85c71507771ab48a319e8c8148316829ff2b21e781f4c0bc6",
+    "main/main.c": "35d66603f8055f180f12bfc55cb87d985b1954476cdfef9d1e35942193a2bfbf"
+  },
+  "nota": "Hashes são dos fontes locais; conferir build/flash e identificação do firmware no log.",
+  "sha256_log": "3e4f17105caa1f1205feac82eac1376cd97c35a7ce3bd8f98b3395ce47fdfc75"
+}
