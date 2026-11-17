@@ -26,7 +26,7 @@ def escape(text):
 
 
 def inline(text):
-    parts = re.split(r'(\*\*.*?\*\*|https://\S+|`[^`]+`|(?:scripts|dados|analises|relatorio)/[\w./-]+)', text)
+    parts = re.split(r'(\*\*.*?\*\*|https://\S+|`[^`]+`|\b2\^(?:32|64)\b|(?:scripts|dados|analises|relatorio)/[\w./-]+)', text)
     result = []
     for part in parts:
         if part.startswith('**'):
@@ -37,6 +37,8 @@ def inline(text):
             result.append(r'\texttt{' + escape(part[1:-1]) + '}')
         elif re.match(r'(?:scripts|dados|analises|relatorio)/', part):
             result.append(r'\path{' + part + '}')
+        elif re.fullmatch(r'2\^(32|64)', part):
+            result.append(r'\ensuremath{2^{' + part[2:] + '}}')
         else:
             result.append(escape(part))
     return ''.join(result)
@@ -46,6 +48,8 @@ def convert(source):
     output = ['% Conteúdo do relatório. Preencher o RA na identificação abaixo.']
     figures = []
     table_count = 0
+    # A identificação fica na capa; o corpo começa na primeira seção numerada.
+    source = source[source.index('## 1. '):]
     for block in source.strip().split('\n\n'):
         block = block.strip()
         if not block:
@@ -56,17 +60,17 @@ def convert(source):
             output.append(r'\clearpage')
             heading = block.split('\n', 1)[1]
             assert heading.startswith('## '), heading
-            output.append(r'\section*{' + inline(heading[3:]) + '}')
+            output.append(r'\section{' + inline(re.sub(r'^\d+\.\s*', '', heading[3:])) + '}')
         elif block.startswith('|'):
             matrix = [[cell.strip() for cell in line.strip('|').split('|')]
                       for line in block.splitlines()]
             header, body = matrix[0], matrix[2:]
             assert all(len(row) == len(header) for row in body)
             columns = ' '.join('Y' for _ in header)
-            table = [r'\begingroup', r'\fontsize{6.7}{8.8}\selectfont',
-                     r'\setlength{\tabcolsep}{3pt}', r'\renewcommand{\arraystretch}{1.25}',
+            table = [r'\begingroup', r'\fontsize{7}{9}\selectfont',
+                     r'\setlength{\tabcolsep}{1.5pt}', r'\renewcommand{\arraystretch}{1.15}',
                      r'\noindent\begin{tabularx}{\linewidth}{@{}' + columns + '@{}}',
-                     r'\toprule', r'\rowcolor{cabecalho}',
+                     r'\toprule',
                      ' & '.join(r'\textbf{' + inline(c) + '}' for c in header) + r' \\',
                      r'\midrule']
             table.extend(' & '.join(inline(c) for c in row) + r' \\' for row in body)
@@ -83,13 +87,16 @@ def convert(source):
             output.append('\n'.join([
                 r'\noindent\includegraphics[width=\linewidth]{' + path + '}',
                 r'\par\vspace{3pt}',
-                r'{\sffamily\fontsize{7.5}{10}\selectfont ' + inline(caption) + r'\par}',
+                r'{\noindent\fontsize{8}{10}\selectfont ' + inline(caption) + r'\par}',
                 r'\vspace{7pt}',
             ]))
         elif block.startswith('### '):
-            output.append(r'\subsection*{' + inline(block[4:]) + '}')
+            title = block[4:]
+            command = r'\subsection' if re.match(r'^\d+\.\d+ ', title) else r'\subsection*'
+            title = re.sub(r'^\d+\.\d+\s*', '', title)
+            output.append(command + '{' + inline(title) + '}')
         elif block.startswith('## '):
-            output.append(r'\section*{' + inline(block[3:]) + '}')
+            output.append(r'\section{' + inline(re.sub(r'^\d+\.\s*', '', block[3:])) + '}')
         elif block.startswith('# '):
             output.append(r'{\sffamily\bfseries\color{titulo}\fontsize{17}{21}\selectfont '
                           + inline(block[2:]) + r'\par}\vspace{9pt}')
@@ -97,46 +104,46 @@ def convert(source):
             output.append(inline(block.replace('\n', ' ')) + '\n\\par')
     assert table_count == 5, table_count
     assert len(figures) == 5, figures
-    assert sum(r'\clearpage' in block for block in output) == 7
+    assert sum(r'\clearpage' in block for block in output) == 6
     return '\n\n'.join(output) + '\n', figures
 
 
 PREAMBLE = r'''% Arquivo principal: compilar main.tex com pdfLaTeX no Overleaf.
-\documentclass[9pt,a4paper]{extarticle}
+% Estilo da M2: capa institucional, Latin Modern, títulos pretos e recuo.
+% Corpo compacto e sem sumário separado para respeitar as oito páginas da M3.
+\documentclass[12pt,a4paper]{article}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[brazil]{babel}
 \usepackage{lmodern}
-\usepackage[left=38pt,right=38pt,top=40pt,bottom=37pt,footskip=20pt]{geometry}
+\usepackage[left=30mm,right=20mm,top=25mm,bottom=25mm,footskip=12mm]{geometry}
 \usepackage{graphicx}
 \usepackage[table]{xcolor}
 \usepackage{array,tabularx,booktabs}
 \usepackage{amsmath,amssymb}
 \usepackage{titlesec}
-\usepackage{fancyhdr}
+\usepackage{indentfirst}
 \usepackage{microtype}
 \usepackage{xurl}
 \usepackage[unicode,hidelinks]{hyperref}
 
-\definecolor{titulo}{HTML}{153D52}
-\definecolor{cabecalho}{HTML}{E4EDF2}
+\definecolor{institucional}{HTML}{174586}
 \newcolumntype{Y}{>{\raggedright\arraybackslash}X}
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{5pt}
+\setlength{\parindent}{1.25cm}
+\setlength{\parskip}{3pt}
 \setlength{\emergencystretch}{2em}
-\titleformat{\section}{\sffamily\bfseries\color{titulo}\fontsize{11.5}{15}\selectfont}{}{0pt}{}
-\titleformat{\subsection}{\sffamily\bfseries\fontsize{9.8}{13}\selectfont}{}{0pt}{}
-\titlespacing*{\section}{0pt}{6pt}{8pt}
-\titlespacing*{\subsection}{0pt}{4pt}{5pt}
-\pagestyle{fancy}
-\fancyhf{}
-\renewcommand{\headrulewidth}{0pt}
-\fancyfoot[L]{\sffamily\fontsize{7}{9}\selectfont UNIVALI \textperiodcentered{} Sistemas em Tempo Real \textperiodcentered{} Atividade complementar M3}
-\fancyfoot[R]{\sffamily\fontsize{7}{9}\selectfont\thepage}
+\titleformat{\section}{\bfseries\fontsize{14}{17}\selectfont}{\thesection}{0.8em}{}
+\titleformat{\subsection}{\bfseries\fontsize{11}{13}\selectfont}{\thesubsection}{0.8em}{}
+\titlespacing*{\section}{0pt}{7pt}{7pt}
+\titlespacing*{\subsection}{0pt}{5pt}{4pt}
+\pagestyle{plain}
 \hypersetup{pdftitle={Quanto o teste enxerga do pior caso? -- Huffman na ESP32},pdfauthor={Miguel Bertonzin}}
 
 \begin{document}
-\fontsize{9}{12}\selectfont
+\hypersetup{pageanchor=false}
+\input{capa.tex}
+\hypersetup{pageanchor=true}
+\fontsize{11}{13}\selectfont
 \input{conteudo.tex}
 \end{document}
 '''
@@ -144,17 +151,22 @@ PREAMBLE = r'''% Arquivo principal: compilar main.tex com pdfLaTeX no Overleaf.
 INSTRUCTIONS = '''# Arquivos para o Overleaf
 
 Importar `Overleaf_Miguel_STR.zip` como projeto e compilar `main.tex` com pdfLaTeX.
-O texto e as tabelas ficam em `conteudo.tex`; a identificação tem o campo do RA.
+O texto e as tabelas ficam em `conteudo.tex`; o RA fica em `capa.tex`.
 As cinco figuras em PDF ficam em `figuras/`.
+
+O estilo segue a M2: capa institucional, fonte Latin Modern, títulos numerados,
+parágrafos com recuo e paginação central. O corpo foi compactado para 11 pt,
+sem sumário separado: são oito páginas físicas, incluindo a capa, conforme a M3.
 
 Para gerar novamente a partir das análises, executar na raiz do repositório:
 
 ```powershell
 python scripts/gerar_relatorio.py
-python scripts/gerar_latex.py
 ```
 
-A geração substitui `main.tex`, `conteudo.tex` e o ZIP. Guarde separadamente as
+A geração usa `texto_base.md` e substitui os três arquivos `.tex` e o ZIP.
+Com Tectonic disponível, também compila o PDF; caso contrário, compilar no Overleaf.
+Guarde separadamente as
 alterações feitas no Overleaf antes de gerar novamente.
 '''
 
@@ -162,11 +174,45 @@ alterações feitas no Overleaf antes de gerar novamente.
 def main():
     source = (REPORT/'RELATORIO_EDITAVEL.md').read_text(encoding='utf-8')
     content, figures = convert(source)
-    for name, text in [('main.tex', PREAMBLE), ('conteudo.tex', content), ('OVERLEAF.md', INSTRUCTIONS)]:
+    student = re.search(r'\*\*Acadêmico:\*\* (.*)', source)[1].rstrip('.')
+    professors = re.search(r'\*\*Professores:\*\* (.*)', source)[1].rstrip('.')
+    repository = re.search(r'\*\*Repositório:\*\* (https://\S+)', source)[1]
+    cover = r'''% Identificação do trabalho individual.
+\begin{titlepage}
+\centering
+{\color{institucional}\bfseries\fontsize{24.88}{30}\selectfont UNIVALI\par}
+\vspace{10pt}
+Universidade do Vale do Itajaí\\
+Escola Politécnica\\
+Engenharia de Computação\\
+Sistemas em Tempo Real
+\vfill
+{\bfseries\fontsize{17.28}{21}\selectfont ATIVIDADE COMPLEMENTAR M3\\
+QUANTO O TESTE ENXERGA DO PIOR CASO?\par}
+\vspace{14pt}
+{\fontsize{14.4}{18}\selectfont Codificação de Huffman na ESP32:\\
+tempo de resposta e análise (m,k)-firme\par}
+\vfill
+\textbf{Acadêmico}\\
+''' + inline(student).replace(' --- RA:', r'\\ RA:') + r'''
+\vspace{20pt}
+
+\textbf{Professores}\\
+''' + inline(professors).replace(' e Felipe', r'\\ Felipe') + r'''
+\vspace{20pt}
+
+{\fontsize{9}{12}\selectfont\textbf{Repositório}\\
+\url{''' + repository + r'''}\par}
+\vfill
+Itajaí -- SC\\
+2026
+\end{titlepage}
+'''
+    for name, text in [('main.tex', PREAMBLE), ('capa.tex', cover), ('conteudo.tex', content), ('OVERLEAF.md', INSTRUCTIONS)]:
         (REPORT/name).write_text(text, encoding='utf-8', newline='\n')
     package = REPORT/'Overleaf_Miguel_STR.zip'
     with zipfile.ZipFile(package, 'w', compression=zipfile.ZIP_DEFLATED) as archive:
-        for name in ['main.tex', 'conteudo.tex', 'OVERLEAF.md', *figures]:
+        for name in ['main.tex', 'capa.tex', 'conteudo.tex', 'OVERLEAF.md', *figures]:
             archive.write(REPORT/name, name)
     print(f'LaTeX e projeto Overleaf gerados: {package}')
 

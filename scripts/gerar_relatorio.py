@@ -1,28 +1,20 @@
 """Monta o relatório de oito páginas a partir do texto e das coletas preservadas.
 
-Editar relatorio/texto_base.md para revisar o texto e preencher os RAs.
+Editar relatorio/texto_base.md para revisar o texto e preencher o RA.
 Tabelas e figuras são reconstruídas a partir dos resultados e dos CSV.
 """
 from pathlib import Path
 from decimal import Decimal, ROUND_HALF_UP
 import csv
 import json
-import re
-from html import escape
+import shutil
+import subprocess
 
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
-from matplotlib import font_manager
 from pypdf import PdfReader
-from reportlab.lib import colors
-from reportlab.lib.enums import TA_JUSTIFY
-from reportlab.lib.pagesizes import A4
-from reportlab.lib.styles import ParagraphStyle
-from reportlab.pdfbase import pdfmetrics
-from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, PageBreak, Table, TableStyle, Image
 
 from analisar_coletas import load, FIXED_D
 from metricas import analyze, compact
@@ -173,77 +165,6 @@ def tables(results):
     }
 
 
-def inline(text):
-    safe=escape(text)
-    safe=re.sub(r'\*\*(.+?)\*\*',r'<b>\1</b>',safe)
-    safe=re.sub(r'(https://[^\s<]+)',r'<link href="\1" color="#185a7d">\1</link>',safe)
-    return safe
-
-
-def pdf(text):
-    fonts=Path(matplotlib.get_data_path())/'fonts/ttf'
-    for name,filename in [('Body','DejaVuSerif.ttf'),('BodyBold','DejaVuSerif-Bold.ttf'),('Sans','DejaVuSans.ttf'),('SansBold','DejaVuSans-Bold.ttf')]:
-        pdfmetrics.registerFont(TTFont(name,str(fonts/filename)))
-    pdfmetrics.registerFontFamily('Body',normal='Body',bold='BodyBold',italic='Body',boldItalic='BodyBold')
-    pdfmetrics.registerFontFamily('Sans',normal='Sans',bold='SansBold',italic='Sans',boldItalic='SansBold')
-    styles={
-        'p':ParagraphStyle('p',fontName='Body',fontSize=9,leading=12,spaceAfter=5,alignment=TA_JUSTIFY),
-        'h1':ParagraphStyle('h1',fontName='SansBold',fontSize=17,leading=21,spaceAfter=9,textColor=colors.HexColor('#153d52')),
-        'h2':ParagraphStyle('h2',fontName='SansBold',fontSize=11.5,leading=15,spaceBefore=6,spaceAfter=8,textColor=colors.HexColor('#153d52')),
-        'h3':ParagraphStyle('h3',fontName='SansBold',fontSize=9.8,leading=13,spaceBefore=4,spaceAfter=5),
-        'caption':ParagraphStyle('caption',fontName='Sans',fontSize=7.5,leading=10,spaceAfter=7),
-        'cell':ParagraphStyle('cell',fontName='Sans',fontSize=6.7,leading=8.8),
-    }
-    path=OUT/'Relatorio_Individual_Miguel_STR.pdf'
-    doc=SimpleDocTemplate(str(path),pagesize=A4,rightMargin=38,leftMargin=38,topMargin=40,bottomMargin=37,
-                          title='Quanto o teste enxerga do pior caso? — Huffman na ESP32',
-                          author='Miguel Bertonzin')
-    story=[]
-    for block in text.replace('<!-- pagina -->', '\n\n<!-- pagina -->\n\n').split('\n\n'):
-        block=block.strip()
-        if not block: continue
-        if block=='<!-- pagina -->': story.append(PageBreak()); continue
-        if block.startswith('!['):
-            match=re.fullmatch(r'!\[(.+)\]\((.+)\)',block)
-            image=Image(str(OUT/match[2]))
-            image.drawHeight*=doc.width/image.drawWidth
-            image.drawWidth=doc.width
-            story.extend([image,Spacer(1,4),Paragraph(inline(match[1]),styles['caption'])]); continue
-        if block.startswith('|'):
-            matrix=[[c.strip() for c in line.strip('|').split('|')] for line in block.splitlines()]
-            matrix.pop(1)
-            cells=[[Paragraph(inline(c),styles['cell']) for c in row] for row in matrix]
-            if len(matrix[0])==11:
-                weights=[1.13,1.29,.82,1.17,.91,.91,.89,.32,.9,.9,.9]
-            else: weights=[1]*len(matrix[0])
-            widths=[doc.width*w/sum(weights) for w in weights]
-            table=Table(cells,colWidths=widths,hAlign='LEFT',repeatRows=1)
-            table.setStyle(TableStyle([
-                ('BACKGROUND',(0,0),(-1,0),colors.HexColor('#e4edf2')),
-                ('ROWBACKGROUNDS',(0,1),(-1,-1),[colors.white,colors.HexColor('#f5f7f8')]),
-                ('VALIGN',(0,0),(-1,-1),'MIDDLE'),('LEFTPADDING',(0,0),(-1,-1),3),
-                ('RIGHTPADDING',(0,0),(-1,-1),3),('TOPPADDING',(0,0),(-1,-1),4),('BOTTOMPADDING',(0,0),(-1,-1),4),
-                ('LINEBELOW',(0,0),(-1,0),.6,colors.HexColor('#8da6b4'))]))
-            story.extend([table,Spacer(1,7)]);continue
-        key='p'
-        for marker,style in [('### ','h3'),('## ','h2'),('# ','h1')]:
-            if block.startswith(marker): key=style;block=block[len(marker):];break
-        story.append(Paragraph(inline(block.replace('\n',' ')),styles[key]))
-    def footer(canvas,document):
-        canvas.setFont('Sans',7)
-        canvas.setFillColor(colors.HexColor('#53636c'))
-        canvas.drawString(38,22,'UNIVALI · Sistemas em Tempo Real · Atividade complementar M3')
-        canvas.drawRightString(A4[0]-38,22,str(document.page))
-    doc.build(story,onFirstPage=footer,onLaterPages=footer)
-    reader=PdfReader(path)
-    count=len(reader.pages)
-    print(f'PDF: {path}\nPáginas: {count}')
-    if count!=8:
-        for i,page in enumerate(reader.pages,1):
-            print(i,page.extract_text()[:95].replace('\n',' | '))
-        raise RuntimeError('Revisar diagramação: esperado relatório com oito páginas.')
-
-
 def main():
     OUT.mkdir(exist_ok=True);FIG.mkdir(exist_ok=True)
     results=json.loads((ROOT/'analises/resultados.json').read_text(encoding='utf-8'))
@@ -259,7 +180,25 @@ def main():
     for name,content in tables(results).items():text=text.replace('{{'+name+'}}',content)
     if '{{' in text:raise ValueError('Marcador de tabela não preenchido.')
     (OUT/'RELATORIO_EDITAVEL.md').write_text(text,encoding='utf-8')
-    pdf(text)
+    from gerar_latex import main as exportar_latex
+    exportar_latex()
+    compiler = shutil.which('tectonic')
+    local = ROOT/'build/latex-tools/tectonic.exe'
+    if not compiler and local.is_file():
+        compiler = str(local)
+    if not compiler:
+        print('Fontes LaTeX prontos. Compilar main.tex no Overleaf; PDF local não atualizado.')
+        return
+    destination = ROOT/'build/latex-validacao'
+    destination.mkdir(parents=True, exist_ok=True)
+    subprocess.run([compiler, '--keep-logs', '--outdir', str(destination), str(OUT/'main.tex')], check=True)
+    compiled = destination/'main.pdf'
+    count = len(PdfReader(compiled).pages)
+    if count != 8:
+        raise RuntimeError(f'Revisar diagramação: {count} páginas; esperadas 8, incluindo a capa.')
+    for name in ('Relatorio_Individual_Miguel_STR.pdf', 'Relatorio_Individual_Miguel_Overleaf.pdf'):
+        shutil.copyfile(compiled, OUT/name)
+    print('Relatório compilado: oito páginas, incluindo a capa.')
 
 
 if __name__=='__main__':main()

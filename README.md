@@ -28,6 +28,8 @@ python -m venv .venv-analise
 ```
 
 O texto do relatório fica em `relatorio/texto_base.md`; o RA ainda precisa ser preenchido.
+O gerador monta o projeto LaTeX; o PDF é compilado com Tectonic, quando disponível,
+ou no Overleaf. A conferência do enunciado está em [CONFERENCIA.md](relatorio/CONFERENCIA.md).
 Para recompilar uma etapa, copiar `dados/etapaN/fontes` para uma pasta separada
 e executar `idf.py build` no terminal ESP-IDF. A etapa 4 também precisa do coletor
 `scripts/coletar_sistema.py` para gerar o tráfego UART.
