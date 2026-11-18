@@ -2,9 +2,9 @@
   "id": "miguel_esp32_individual",
   "responsavel": "Miguel Bertonzin",
   "data_preparacao": "2026-11-16",
-  "placa": "ESP32 propria de Miguel; ESP32-D0WD-V3 revisao v3.1",
+  "placa": "ESP32-D0WD-V3, revisão 3.1",
   "identificacao_hardware": {
-    "origem": "Saida de esptool chip-id executado pelo usuario na COM7",
+    "origem": "Identificação da placa com esptool chip-id na COM7",
     "esptool": "5.3.1",
     "chip": "ESP32-D0WD-V3",
     "revisao": "v3.1",
@@ -47,6 +47,5 @@
   "etapa2_registro": "dados/etapa2/registro.json",
   "etapa3_registro": "dados/etapa3/registro.json",
   "etapa4_registro": "dados/etapa4/registro.json",
-  "estado": "coletas_analises_relatorio_concluidos_ra_pendente",
-  "relatorio": "relatorio/Relatorio_Individual_Miguel_STR.pdf"
+  "estado": "campanha_concluida"
 }

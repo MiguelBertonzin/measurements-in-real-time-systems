@@ -88,7 +88,6 @@ def main():
                     if b"COLETA_CSV_FIM etapa=4 amostras=10000" in recent:
                         metadata["estado"] = "captura_recebida_pendente_validacao_csv"
                         print("Captura concluida. Log preservado em:", path, flush=True)
-                        print("Envie esse arquivo para validar e importar as 10000 medicoes.")
                         return
                 if now >= next_progress:
                     if receiving_csv:

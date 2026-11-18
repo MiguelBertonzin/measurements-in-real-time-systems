@@ -2,7 +2,7 @@
   "campanha": "miguel_esp32_individual",
   "etapa": 3,
   "identificacao_hardware": {
-    "origem": "Saida de esptool chip-id executado pelo usuario na COM7",
+    "origem": "Identificação da placa com esptool chip-id na COM7",
     "esptool": "5.3.1",
     "chip": "ESP32-D0WD-V3",
     "revisao": "v3.1",

@@ -29,7 +29,7 @@ def main():
         'etapa_preparada': stage, 'etapas_coletadas': list(range(1, stage)),
     })
     for key in ('etapa1_registro', 'etapa2_registro', 'etapa3_registro', 'etapa4_registro',
-                'relatorio', 'sha256_fontes_iniciais'):
+                'sha256_fontes_iniciais'):
         campaign.pop(key, None)
     (destination / 'campanha.json').write_text(
         json.dumps(campaign, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')

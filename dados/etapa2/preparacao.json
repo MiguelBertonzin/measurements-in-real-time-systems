@@ -11,7 +11,7 @@
   "tick_hz": 100,
   "tarefa_core": 0,
   "prioridade": 1,
-  "compilacao_esp32": "Concluida com sucesso; gravacao e execucao na placa pendentes",
+  "compilacao_esp32": "Compilação concluída com sucesso",
   "sha256": {
     "CMakeLists.txt": "9a89907a6d3e61bc515c277f4a82dd4ef39e55ee4f38d17c70179aaa85dd6e19",
     "sdkconfig": "91d0d9fa0caf88f7ace2b4e2c94b18d7d83ac682575c905311e8b221574b522e",
@@ -22,7 +22,7 @@
   },
   "campanha": "miguel_esp32_individual",
   "identificacao_hardware": {
-    "origem": "Saida de esptool chip-id executado pelo usuario na COM7",
+    "origem": "Identificação da placa com esptool chip-id na COM7",
     "esptool": "5.3.1",
     "chip": "ESP32-D0WD-V3",
     "revisao": "v3.1",

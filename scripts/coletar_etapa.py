@@ -73,7 +73,6 @@ def main():
                                 raise RuntimeError('Fim recebido sem confirmação de validação das 1000 ativações.')
                             metadata['estado'] = 'captura_recebida_pendente_validacao_csv'
                             print(f'Captura concluída: {path}', flush=True)
-                            print('Envie o caminho acima para validar o CSV e preparar a próxima etapa.', flush=True)
                             return
                     if time.monotonic() >= next_progress:
                         print(f'Aguardando resultado: {int(time.monotonic()-started)} s; {log.tell()} bytes salvos.', flush=True)

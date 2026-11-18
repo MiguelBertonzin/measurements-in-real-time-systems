@@ -92,7 +92,7 @@ def main():
                *[p for p in (ROOT/'main').rglob('*') if p.is_file()]]
     record = {
         'campanha': campaign['id'], 'etapa': 1, 'escopo': 'tarefa',
-        'origem': 'Coleta real na ESP32 de Miguel; capturada por serial e validada contra o log',
+        'origem': 'Medições da etapa 1 capturadas pela porta serial da ESP32',
         'sha256_log_original': sha(original), 'sha256_csv': sha(buffer.getvalue().encode('utf-8')),
         'ativacoes_validadas': len(rows), 'entrada_bytes': 4096, 'semente': 123456789,
         'identificacao_hardware': campaign['identificacao_hardware'],

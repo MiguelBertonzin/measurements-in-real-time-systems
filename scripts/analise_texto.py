@@ -9,8 +9,8 @@ def make_report(output, results, alternatives, thresholds, optimum, convergence,
     def pair(r,k):
         return f"({r['janelas'][k]['m']},{k})"
     s=results
-    text=['# Análises — campanha individual de Miguel Bertonzin',
-          'As quatro coletas são da ESP32 própria de Miguel. Logs brutos, hashes, CSV e fontes estão preservados. Nenhuma amostra foi descartada. Na etapa 2, o registro documenta um prefixo de boot separado somente para leitura; o arquivo bruto permanece intacto.',
+    text=['# Análise das medições de Huffman na ESP32',
+          'As quatro coletas foram executadas na ESP32-D0WD-V3. Logs brutos, hashes, CSV e fontes estão preservados. Nenhuma amostra foi descartada. Na etapa 2, o registro documenta um prefixo de boot separado somente para leitura; o arquivo bruto permanece intacto.',
           '## Convenções',
           f'D fixo = {fmt(s[1]["deadline_us"])} µs, calculado como 1,2 × HWM1. Cumpre em R ≤ D; perde em R > D. HWM99 remove floor(N/100) valores do topo e toma o maior restante. S é a menor distância entre perdas; fica indefinido com menos de duas. Rajada tem pelo menos duas perdas consecutivas. São avaliadas todas as N−k+1 janelas completas; m = k − máximo de perdas.',
           '## Resultados',
@@ -37,5 +37,5 @@ def make_report(output, results, alternatives, thresholds, optimum, convergence,
              'Percentual global não caracteriza o espaçamento das perdas. Para uma planta com inércia, perdas isoladas e longas rajadas podem ter efeitos diferentes. S e (m,k) descrevem a concentração, mas não validam fisicamente uma tolerância.',
              '## Limitações e reprodução',
              'Uma campanha por cenário, semente e tamanho; N diferente entre etapas; jitter antes do envio excluído; cache, interrupções e processos do computador não rastreados. Cobertura é do algoritmo no computador. ESP-IDF v6.1-dirty aparece na nova campanha. O volume UART real deve ser consultado em dados/etapa4/evidencias/validacao.json. HWM e (m,k) são observados, sem garantia futura.',
-             'Executar scripts/analisar_coletas.py dentro desta campanha. O relatório de oito páginas é montado por scripts/gerar_relatorio.py.']
+             'Execute scripts/analisar_coletas.py na raiz do projeto para reproduzir as tabelas e os gráficos.']
     (output/'RELATORIO_ANALISE.md').write_text('\n\n'.join(text)+'\n',encoding='utf-8')

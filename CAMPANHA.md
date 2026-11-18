@@ -10,3 +10,8 @@ Deadline: 1,2 × HWM da etapa 1 = 32.440,8 µs.
 | Evento | 1.000 | 27.148 | 0 |
 | Intertarefas | 1.000 | 39.962 | 179 |
 | Sistema com UART | 10.000 | 40.304 | 1.786 |
+
+Os registros de coleta conservam os hashes da campanha original. Os scripts de coleta e
+as instruções atuais de demonstração estão na raiz do repositório. Os projetos
+preservados em `dados/etapaN/fontes/` contêm o código do firmware e a configuração
+de cada etapa.

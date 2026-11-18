@@ -1,2 +1,0 @@
--r requirements-analise.txt
-pypdf==7.0.1

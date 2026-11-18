@@ -109,7 +109,7 @@ def main():
             "media": float(sum(times) / len(times)),
             "hwm_100": float(max(times)),
         },
-        "origem": "Log real fornecido pelo usuario; nao e simulacao",
+        "origem": f"Medições da etapa {args.etapa} capturadas pela porta serial da ESP32",
     }
     files = {
         folder / f"etapa{args.etapa}_{NAMES[args.etapa]}.csv": buffer.getvalue().encode("utf-8"),
